@@ -23,6 +23,12 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+/* .str-chat__container{
+  background-color: red;
+}
+.str-chat__ul{
+  background-color: pink;
+} */
 
 .App-link {
   color: #61dafb;
