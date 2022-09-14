@@ -1,9 +1,7 @@
-import './App.css';
-import BasicRoutes from './routes/basic-routes';
+import "./App.css";
+import BasicRoutes from "./routes/basic-routes";
 function App() {
-return (
-   <BasicRoutes/>
-  );
+  return <BasicRoutes />;
 }
 
 export default App;

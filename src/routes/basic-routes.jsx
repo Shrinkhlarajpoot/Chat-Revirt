@@ -1,25 +1,37 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom'
-import { RevirtChat } from '../containers/Chat';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import { RevirtChat } from "../containers/Chat";
 
-import {Login} from '../containers/Login';
-
+import { Login } from "../containers/Login";
+import { SignUp } from "../containers/SignUp";
 
 export default function BasicRoutes() {
-return(
+  return (
     <Routes>
-        <Route path='/' element={
+      <Route
+        path="/"
+        element={
           <React.Suspense fallback="Loading....">
-           <Login/>
+            <Login />
           </React.Suspense>
-        } />
-        <Route path='/chat' element={
+        }
+      />
+      <Route
+        path="/chat"
+        element={
           <React.Suspense fallback="Loading...">
-         <RevirtChat/>
+            <RevirtChat />
           </React.Suspense>
-        } />
-        </Routes>
-
-)
-   
+        }
+      />
+      <Route
+        path="/signup"
+        element={
+          <React.Suspense fallback="Loading...">
+            <SignUp />
+          </React.Suspense>
+        }
+      />
+    </Routes>
+  );
 }
