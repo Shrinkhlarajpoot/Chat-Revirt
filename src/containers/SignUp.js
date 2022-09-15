@@ -9,6 +9,7 @@ import { StreamChat } from "stream-chat";
 export const SignUp = () => {
   const [id, setId] = useState("");
   const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const setUserId = useStore1((state) => state.setUserId);
   const navigate = useNavigate();
   const storage = new Storage();
@@ -16,15 +17,13 @@ export const SignUp = () => {
   const signUpHandler = async () => {
     storage.delete("chatToken");
     try {
-      const { data } = await axios.post("http://localhost:5173/chat/getToken", {
-        username: id,
+      const { data } = await axios.post("http://localhost:5173/chat/signup", {
+        username: userName,
+        userId: id,
+        email,
       });
       console.log(data.token);
       storage.save("chatToken", data.token);
-      const res = await axios.post("http://localhost:5173/chat/addUser", {
-        userId: id,
-      });
-      console.log(res);
       setUserId(id);
       navigate("/chat");
     } catch (err) {
@@ -59,9 +58,20 @@ export const SignUp = () => {
           value={id}
         />
       </div>
-      <button disabled={id === ""} onClick={signUpHandler}>
-        Sign Up
-      </button>
+      <div>
+        <input
+          type="text"
+          placeholder="email"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+        />
+      </div>
+      <div style={{ display: "flex" }}>
+        <button onClick={() => navigate("/")}>Back to Login</button>
+        <button disabled={id === ""} onClick={signUpHandler}>
+          Sign Up
+        </button>
+      </div>
     </div>
   );
 };

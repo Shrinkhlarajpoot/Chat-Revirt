@@ -13,28 +13,13 @@ export const Login = () => {
   const navigate = useNavigate();
   const storage = new Storage();
 
-  // const connectToGlobalChannel = async () => {
-  //   const user = {
-  //     id,
-  //     name: userName,
-  //     image: `https://getstream.io/random_svg/?name=${userName}`,
-  //   };
-
-  //   const client = StreamChat.getInstance(process.env.REACT_APP_API_KEY);
-  //   // const response = await client.upsertUser(user);
-  //   // console.log(response);
-  //   const channels = await client.queryChannels({});
-  //   const globalChannelId = channels[0].data.id;
-  //   console.log(globalChannelId);
-  // };
-
   const loginHandler = async () => {
     storage.delete("chatToken");
     try {
-      const { data } = await axios.post("http://localhost:5173/chat/getToken", {
-        username: id,
+      const { data } = await axios.post("http://localhost:5173/chat/login", {
+        userId: id,
       });
-      console.log(data.token);
+      console.log(data);
       storage.save("chatToken", data.token);
       setUserId(id);
       navigate("/chat");
@@ -70,9 +55,12 @@ export const Login = () => {
           value={id}
         />
       </div>
-      <button disabled={id === ""} onClick={loginHandler}>
-        Continue
-      </button>
+      <div style={{ display: "flex" }}>
+        <button disabled={id === ""} onClick={loginHandler}>
+          Continue
+        </button>
+        <button onClick={() => navigate("/signup")}>Sign Up</button>
+      </div>
     </div>
   );
 };
